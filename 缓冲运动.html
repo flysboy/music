@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	div{
+			width: 100px;
+			height: 100px;
+			background: orange;
+			position: absolute;
+	}
+	span{
+		width: 100px;
+		height: 1px;
+		position: absolute;
+		top: 300px;
+		background: #000;
+	}
+	button{
+		position: absolute;
+		left: 130px;
+
+	}
+	</style>
+</head>
+<body>
+	<div id="oDiv"></div>
+	<span></span>
+	<button id="oBtn">run</button>
+	<script>
+		var oBtn = document.getElementsByTagName('button')[0]; 
+		var oDiv = document.getElementsByTagName('div')[0];
+		oBtn.onclick = function(){
+			startmove(oDiv);
+		}
+		var timer = null;
+		function startmove(dom){
+			clearInterval(timer);
+			var iSpeed = 0;
+			timer = setInterval(function(){
+				iSpeed = (300 - dom.offsetTop) / 30;
+				iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+				if (Math.abs(300 - dom.offsetTop) < Math.abs(iSpeed)) {
+					dom.style.top = 300 + 'px';
+				}else{
+					dom.style.top = dom.offsetTop + iSpeed + 'px';
+				}
+			}, 30);
+		}
+		</script>
+	
+</body>
+</html>
