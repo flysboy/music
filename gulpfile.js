@@ -15,13 +15,13 @@ gulp.task("html", function(){
 gulp.task("watch", function(){
 	gulp.watch("./src/index.html",["html"]);
 	gulp.watch("./src/css/*.less",["less"]);
+	gulp.watch("./src/js/*.js",["js"]);
 })
 
 //服务开启任务
 gulp.task("server", function(){
 	connect.server({
 		root: './dist',
-		port: 8091,
 		livereload: true
 	});
 })
@@ -34,4 +34,11 @@ gulp.task("less", function(){
 		.pipe(gulp.dest('./dist/css/'));
 })
 
-gulp.task("default", ["html","watch","server","less"]);
+//把js转移到dist
+gulp.task("js", function(){
+		gulp.src('./src/js/*.js')
+		.pipe(connect.reload())
+		.pipe(gulp.dest('./dist/js/'));
+})
+
+gulp.task("default", ["html","watch","server","less","js"]);
